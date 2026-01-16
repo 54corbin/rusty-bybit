@@ -1,5 +1,8 @@
 # Rusty-Bybit SDK
 
+[![crates.io](https://img.shields.io/crates/v/rusty-bybit)](https://crates.io/crates/rusty-bybit)
+[![docs.rs](https://img.shields.io/docsrs/rusty-bybit)](https://docs.rs/rusty-bybit)
+
 An unofficial Rust SDK for the [Bybit V5 API](https://bybit-exchange.github.io/docs/v5/guide).
 
 ## ⚠️ Warning
@@ -30,6 +33,14 @@ Add to your `Cargo.toml`:
 [dependencies]
 rusty-bybit = "0.1"
 ```
+
+Or install with cargo:
+
+```bash
+cargo add rusty-bybit
+```
+
+[View on crates.io](https://crates.io/crates/rusty-bybit)
 
 ## Quick Start
 
