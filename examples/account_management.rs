@@ -91,18 +91,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             if let Some(list) = executions.get("list").and_then(|v| v.as_array()) {
                 println!("   Total executions: {}", list.len());
                 for exec in list.iter().take(3) {
-                    if let Some(obj) = exec.as_object() {
-                        if let (Some(order_id), Some(symbol), Some(side), Some(exec_qty)) = (
+                    if let Some(obj) = exec.as_object()
+                        && let (Some(order_id), Some(symbol), Some(side), Some(exec_qty)) = (
                             obj.get("orderId").and_then(|v| v.as_str()),
                             obj.get("symbol").and_then(|v| v.as_str()),
                             obj.get("side").and_then(|v| v.as_str()),
                             obj.get("execQty").and_then(|v| v.as_str()),
-                        ) {
-                            println!(
-                                "     Order: {} - {} {} @ qty: {}",
-                                order_id, side, symbol, exec_qty
-                            );
-                        }
+                        )
+                    {
+                        println!(
+                            "     Order: {} - {} {} @ qty: {}",
+                            order_id, side, symbol, exec_qty
+                        );
                     }
                 }
             }
@@ -126,14 +126,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             if let Some(list) = closed_pnl.get("list").and_then(|v| v.as_array()) {
                 println!("   Total closed PnL records: {}", list.len());
                 for pnl in list.iter().take(3) {
-                    if let Some(obj) = pnl.as_object() {
-                        if let (Some(symbol), Some(side), Some(closed_pnl_value)) = (
+                    if let Some(obj) = pnl.as_object()
+                        && let (Some(symbol), Some(side), Some(closed_pnl_value)) = (
                             obj.get("symbol").and_then(|v| v.as_str()),
                             obj.get("side").and_then(|v| v.as_str()),
                             obj.get("closedPnl").and_then(|v| v.as_str()),
-                        ) {
-                            println!("     {} {} - PnL: {}", side, symbol, closed_pnl_value);
-                        }
+                        )
+                    {
+                        println!("     {} {} - PnL: {}", side, symbol, closed_pnl_value);
                     }
                 }
             }
@@ -146,14 +146,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         Ok(closed_pnl) => {
             if let Some(list) = closed_pnl.get("list").and_then(|v| v.as_array()) {
                 println!("   BTCUSDT closed PnL records: {}", list.len());
-                if let Some(first) = list.first() {
-                    if let Some(obj) = first.as_object() {
-                        if let Some(closed_pnl_value) =
-                            obj.get("closedPnl").and_then(|v| v.as_str())
-                        {
-                            println!("   Latest closed PnL: {}", closed_pnl_value);
-                        }
-                    }
+                if let Some(first) = list.first()
+                    && let Some(obj) = first.as_object()
+                    && let Some(closed_pnl_value) = obj.get("closedPnl").and_then(|v| v.as_str())
+                {
+                    println!("   Latest closed PnL: {}", closed_pnl_value);
                 }
             }
         }
