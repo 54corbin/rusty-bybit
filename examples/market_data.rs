@@ -47,7 +47,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     println!("\n5. Getting kline data for BTCUSDT (15 min interval)...");
-    let klines = client.get_kline("linear", "BTCUSDT", "15").await?;
+    let klines = client
+        .get_kline("linear", "BTCUSDT", "15", None, None)
+        .await?;
     if let Some(list) = klines.get("list").and_then(|v| v.as_array()) {
         println!("   Total klines: {}", list.len());
         if let Some(first_kline) = list.first().and_then(|v| v.as_array())

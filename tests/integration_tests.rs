@@ -33,6 +33,9 @@ async fn test_get_instruments() {
 #[tokio::test]
 async fn test_get_kline() {
     let client = BybitClient::testnet();
-    let klines = client.get_kline("linear", "BTCUSDT", "15").await.unwrap();
+    let klines = client
+        .get_kline("linear", "BTCUSDT", "15", None, None)
+        .await
+        .unwrap();
     assert!(klines.is_object() || klines.is_array());
 }
